@@ -5,6 +5,8 @@
 
 package vendor.pixelworks.hardware.display@1.0;
 
-interface IIrisCallback {
+import android.hidl.base@1.0::IBase;
+
+interface IIrisCallback extends IBase {
     onFeatureChanged(int32_t type, vec<int32_t> values);
 };
