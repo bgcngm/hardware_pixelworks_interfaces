@@ -1,0 +1,18 @@
+/*
+ * SPDX-FileCopyrightText: 2025 The LineageOS Project
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+package vendor.pixelworks.hardware.display@1.1;
+
+import android.hidl.base@1.0::IBase;
+
+interface ISoftIrisClient extends IBase {
+    setConfig(uint64_t display, int32_t type, vec<int32_t> values)
+        generates (int32_t result);
+    getConfig(uint64_t display, int32_t type, vec<int32_t> values)
+        generates (int32_t result, vec<int32_t> outValues);
+    oneway onSoftIrisEvent(int32_t eventType, vec<int32_t> eventData);
+    oneway onIrisStateChanged(int32_t state);
+    oneway onCalibrationUpdate(int32_t updateType, vec<uint8_t> calibData);
+};

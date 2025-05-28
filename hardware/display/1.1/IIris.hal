@@ -1,0 +1,47 @@
+/*
+ * SPDX-FileCopyrightText: 2025 The LineageOS Project
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+package vendor.pixelworks.hardware.display@1.1;
+
+import vendor.pixelworks.hardware.display@1.0::IIris;
+import IIrisCallback;
+import ISoftIrisClient;
+
+interface IIris extends @1.0::IIris {
+    initialize(DisplayConfigVariableInfo info) generates (int32_t status);
+    createLayer(uint64_t display, uint64_t id) generates (int32_t status);
+    isHDR10Plus(bool isHdr10Plus) generates (int32_t status);
+    destroyLayer(uint64_t display, uint64_t id) generates (int32_t status);
+    getOsdStatus(int32_t type) generates (int32_t status);
+    setPowerMode(uint64_t display, int32_t mode, bool isAfter, bool fromEvent) generates (int32_t status);
+    getDumpString(uint64_t display) generates (string dumpString);
+    presentDisplay(uint64_t display) generates (int32_t status);
+    setLayerBuffer(uint64_t display, uint64_t id, handle buffer, int32_t acquireFence, BufferInfo bufferInfo) generates (int32_t status);
+    setLayerZOrder(uint64_t display, uint64_t id, uint32_t z) generates (int32_t status);
+    buildLayerStack(uint64_t display, LayerStack layerStack) generates (int32_t status);
+    changeLayerType(uint64_t display, uint64_t newDisplay) generates (int32_t status);
+    setActiveConfig(uint64_t display, DisplayConfigVariableInfo info) generates (int32_t status);
+    setClientTarget(uint64_t display, int32_t acquireFence) generates (int32_t status);
+    commitLayerStack(uint64_t display, uint32_t compType) generates (int32_t status);
+    getCurrentConfig() generates (int32_t status, IrisFixedConfig config);
+    setLayerProperty(uint64_t display, uint32_t prop, uint64_t id) generates (int32_t status);
+    setLayerSetEmpty(uint64_t display, bool empty) generates (int32_t status);
+    setLayerTransform(uint64_t display, uint64_t id, int32_t transform) generates (int32_t status);
+    setOsdAutoRefresh(int32_t value) generates (int32_t status);
+    handleDisplayEvent(uint64_t display, int32_t event, int32_t mode) generates (int32_t status);
+    setLayerSourceCrop(uint64_t display, uint64_t id, HwcRect crop) generates (int32_t status);
+    configureIrisMaxcll(int32_t hdr_maxcll) generates (int32_t status);
+    setDisplayConnected(uint64_t display, bool connected) generates (int32_t status);
+    registerCallback_1_1(uint64_t cookie, IIrisCallback callback) generates (int32_t status);
+    setLayerDisplayFrame(uint64_t display, uint64_t id, HwcRect frame) generates (int32_t status);
+    enableSecondaryDisplay(bool enable) generates (int32_t status);
+    getLayerToneMappingLut(uint64_t display, uint32_t type) generates (int32_t status, LutData lut);
+    registerSoftIrisClient(ISoftIrisClient client) generates (int32_t status);
+    reportDualChannelStatus(int32_t status) generates (int32_t status);
+    setLayerCompositionType(uint64_t display, uint64_t id, int32_t type) generates (int32_t status);
+    updateDisplayBrightness(uint64_t display, int32_t syncMethod, vec<int32_t> values) generates (int32_t status, vec<int32_t> resultParams);
+    setColorModeWithRenderIntent(uint64_t display, int32_t mode, int32_t intent) generates (int32_t status);
+    present(uint64_t display) generates (int32_t status);
+};

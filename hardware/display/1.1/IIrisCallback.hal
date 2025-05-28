@@ -1,0 +1,15 @@
+/*
+ * SPDX-FileCopyrightText: 2025 The LineageOS Project
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+package vendor.pixelworks.hardware.display@1.1;
+
+import vendor.pixelworks.hardware.display@1.0::IIrisCallback;
+
+interface IIrisCallback extends @1.0::IIrisCallback {
+    oneway onNotification(int32_t type, vec<int32_t> data);
+    oneway onRefreshRequested(uint64_t display);
+    oneway onDisplayPowerChanged(uint64_t displayId, int32_t powerMode);
+    oneway onCalibratePatternChanged(uint64_t displayId, uint32_t pattern);
+};

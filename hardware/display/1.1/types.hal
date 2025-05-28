@@ -1,0 +1,237 @@
+/*
+ * SPDX-FileCopyrightText: 2025 The LineageOS Project
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+package vendor.pixelworks.hardware.display@1.1;
+
+struct BufferInfo {
+    int64_t id;
+    int32_t format;
+    int32_t type;
+    int32_t flags;
+    int32_t width;
+    int32_t height;
+    int32_t unalignedWidth;
+    int32_t unalignedHeight;
+    float refreshRate;
+    int32_t frcEnable;
+    int32_t frcCounter;
+    int64_t frcTimestamp;
+    vec<int32_t> reserved;
+};
+
+struct BufferHandle {
+    vec<handle> data;
+    vec<int32_t> ints;
+};
+
+struct ColorMetaData {
+    int32_t colorPrimaries;
+    int32_t range;
+    int32_t transfer;
+    bool lightLevelSEIEnabled;
+    int32_t maxContentLightLevel;
+    int32_t minPicAverageLightLevel;
+    bool dynamicMetaDataValid;
+    int32_t dynamicMetaDataLen;
+    vec<int8_t> dynamicMetaDataPayload;
+};
+
+struct DisplayConfigVariableInfo {
+    bool valid;
+    int32_t xPixels;
+    int32_t yPixels;
+    float xDpi;
+    float yDpi;
+    int32_t fps;
+    int64_t vsyncPeriodNs;
+    bool isYuv;
+    bool smartPanel;
+    int32_t config;
+    vec<int32_t> reserved;
+};
+
+enum DisplayType : int64_t {
+    DISPLAY_PRIMARY = 0,
+    DISPLAY_EXTERNAL = 1,
+    DISPLAY_PLUGGABLE = 1,
+    DISPLAY_VIRTUAL = 2,
+    DISPLAY_BUILTIN_2 = 3,
+    DISPLAY_SECONDARY = 3,
+    DISPLAY_EXTERNAL_2 = 4,
+    DISPLAY_MAX = 5,
+};
+
+enum DualChannelOsdStatus : int32_t {
+    GET_STATE = 0,
+    IS_OVERFLOW = 1,
+};
+
+enum DualChannelState : int32_t {
+    PWRON_PREPARE = 0,
+    PWRON = 1,
+    CFGON_PRE = 2,
+    CFGON = 3,
+    CFGOFF_PRE = 4,
+    CFGOFF = 5,
+    PWROFF_PREPARE = 6,
+    PWROFF = 7,
+};
+
+enum HdrFormalType : int32_t {
+    HDR_FORMAL_NONE = 0,
+    HDR_FORMAL_HDR_SDR = 1,
+    HDR_FORMAL_HDR = 2,
+    HDR_FORMAL_MEMC = 10,
+    HDR_FORMAL_HDR_MEMC = 12,
+    HDR_FORMAL_MEMC_DUAL2 = 40,
+    HDR_FORMAL_HDR_MEMC_DUAL2 = 42,
+};
+
+struct HwcRect {
+    int32_t left;
+    int32_t top;
+    int32_t right;
+    int32_t bottom;
+};
+
+struct LayerStack {
+    uint64_t displayId;
+    vec<uint64_t> layerIds;
+    uint32_t flags;
+};
+
+struct IrisFixedConfig {
+    int32_t hdrFormal;
+    vec<int32_t> hdrLut;
+    int32_t memcEnable;
+    int32_t memcLevel;
+    int32_t dualChannel;
+    int32_t movingLayer;
+    int32_t memcVideoLayer;
+    int32_t inMemcState;
+    int32_t videoFps;
+    int32_t videoInMemory;
+    int32_t gameMode;
+    int32_t captureDisable;
+    int32_t dualPrepare;
+    int32_t inOsdSwitch;
+    int32_t dualPreload;
+    int32_t metadataDone;
+    int32_t memcToPt;
+    int32_t clientCompRequest;
+    int32_t hdrRequest;
+    int32_t motionLayerIdUsing;
+    int32_t testOption;
+    int32_t activeTask;
+    int32_t emvMvdId;
+    int32_t emvGameId;
+    int32_t pqSwitchType;
+    vec<int32_t> reserved;
+};
+
+enum KernelConfig : int32_t {
+    DPP_DEMO_WINDOW = 139, // Duplicate value with TYPE_MAX
+    FINGER_DISPLAY = 140,
+    DPP_FADE_INOUT = 141,
+    DPP_PATH_MUX = 142,
+    GAMMA_MODE = 143,
+    PARAM_VALID = 144,
+    DPORT_DISABLE = 159,
+    DPORT_DIS_DEBUG = 160,
+    HDR10PLUS = 161,
+    SDR2HDR_AI_SWITCH = 162,
+    DPP_3DLUT_GAIN = 163,
+    SDR2HDR_AI_SWITCH_PRE = 165,
+    SET_DSI_MODE_INFO = 167,
+    OSD_LAYER_EMPTY = 168,
+    SET_METADATA = 169,
+    SET_METADATA_LOCK = 170,
+    GET_METADATA = 171,
+    DUAL_CH_CTRL = 172,
+    MEMC_CTRL = 173,
+    MEMC_INFO_SET = 174,
+    DEBUG_SET = 175,
+    DEBUG_GET = 176,
+    KERNEL_STATUS_GET = 177,
+    SET_MVD_META = 178,
+    PWIL_DPORT_DISABLE = 189,
+    HDR_DATA_PATH = 190,
+    DPP_CSC_SET = 191,
+    PT_SR_SET = 192,
+    DEMURA_LUT_SET = 193,
+    DEMURA_ENABLE = 194,
+    DEMURA_XY_LUT_SET = 195,
+    CM_RATIO_SET = 210,
+    GET_PANEL_INFO = 220,
+    TYPE_MAX_V1_1 = 255,
+};
+
+struct LayerBuffer {
+    int32_t width;
+    int32_t height;
+    int32_t unalignedWidth;
+    int32_t unalignedHeight;
+    ColorMetaData colorMetadata;
+    int32_t acquireFenceFd;
+    int32_t releaseFenceFd;
+    int32_t flags;
+    BufferHandle bufferHandle;
+    BufferInfo bufferInfo;
+};
+
+enum LayerBufferType : int32_t {
+    BUFFER_TYPE_UI = 0,
+    BUFFER_TYPE_VIDEO = 1,
+    BUFFER_TYPE_HW_VIDEO = 3,
+    BUFFER_TYPE_HDR_VIDEO = 7,
+};
+
+enum LayerCompositionType : int32_t {
+    COMPOSITION_TYPE_GPU = 0,
+    COMPOSITION_TYPE_HWC = 2,
+};
+
+struct LayerRect {
+    float left;
+    float top;
+    float right;
+    float bottom;
+};
+
+struct LayerTransform {
+    float rotation;
+    bool flipHorizontal;
+    bool flipVertical;
+};
+
+struct LutData {
+    int32_t dim;
+    int32_t gridSize;
+    vec<int32_t> lutEntries;
+    bool validLutEntries;
+    vec<int32_t> gridEntries;
+    bool validGridEntries;
+};
+
+enum Vendor2Config : int32_t {
+    PANEL_REFRESH_RATE = 521, // Duplicate value with TYPE_MAX
+    PANEL_POWER_MODE = 522,
+    WHITE_POINT_SHIFT = 523,
+    PANEL_OEM_ID = 524,
+    BRIGHTNESS_BLEND_CURVE = 525,
+    CM_RATIO_SET = 526,
+    PANEL_APL_VALUE = 527,
+    SET_FEATURE = 528,
+    GAMUT_BLEND_GAIN = 529,
+    TYPE_MAX_V1_1 = 530,
+};
+
+enum VendorConfig : int32_t {
+    GET_SECONDARY_DISPLAY = 268, // Duplicate value with TYPE_MAX
+    FRAME_RATE_CHANGED = 269,
+    SET_LOW_LATENCY = 270,
+    SET_FRAMEBUFFER_RESOLUTION = 271,
+    TYPE_MAX_V1_1 = 272,
+};
