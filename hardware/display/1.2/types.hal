@@ -1,0 +1,37 @@
+/*
+ * SPDX-FileCopyrightText: 2025 The LineageOS Project
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+package vendor.pixelworks.hardware.display@1.2;
+
+import vendor.pixelworks.hardware.display@1.1::BufferInfo;
+import vendor.pixelworks.hardware.display@1.1::DisplayConfigVariableInfo;
+import vendor.pixelworks.hardware.display@1.1::IrisFixedConfig;
+
+struct BufferInfo_1_2 {
+    BufferInfo base;
+    int32_t unalignedWidth;
+    int32_t unalignedHeight;
+    vec<int32_t> reserved;
+};
+
+struct DisplayConfigVariableInfo_1_2 {
+    DisplayConfigVariableInfo base;
+    int32_t config;
+    vec<int32_t> reserved;
+};
+
+struct IrisFixedConfig_1_2 {
+    IrisFixedConfig base;
+    int32_t memcToPt;
+    int32_t clientCompRequest;
+    int32_t hdrRequest;
+    int32_t motionLayerIdUsing;
+    int32_t testOption;
+    int32_t activeTask;
+    int32_t emvMvdId;
+    int32_t emvGameId;
+    int32_t pqSwitchType;
+    vec<int32_t> reserved;
+};

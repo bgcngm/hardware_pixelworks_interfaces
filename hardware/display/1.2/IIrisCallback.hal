@@ -1,0 +1,22 @@
+/*
+ * SPDX-FileCopyrightText: 2025 The LineageOS Project
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+package vendor.pixelworks.hardware.display@1.2;
+
+import vendor.pixelworks.hardware.display@1.1::IIrisCallback;
+
+interface IIrisCallback extends @1.1::IIrisCallback {
+
+    /**
+     * Content sampling callback
+     *
+     * @param displayId   Display identifier
+     * @param type        Sampling type
+     * @param timestamp   Timestamp
+     * @return status and sampling results
+     */
+    onContentSamplingRequested(uint64_t displayId, int32_t type, uint64_t timestamp)
+        generates (int32_t status, vec<uint64_t> luma, vec<uint64_t> chroma, vec<uint64_t> red, vec<uint64_t> green);
+};
