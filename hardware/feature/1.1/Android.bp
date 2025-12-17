@@ -6,6 +6,7 @@ hidl_interface {
     name: "vendor.pixelworks.hardware.feature@1.1",
     root: "vendor.pixelworks",
     system_ext_specific: true,
+    odm_available: true,
     srcs: [
         "types.hal",
         "IIrisFeature.hal",
